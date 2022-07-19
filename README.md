@@ -3,3 +3,5 @@
 this will surely work right ?
 so it doesnt...
 meh
+
+syntax was wrong
