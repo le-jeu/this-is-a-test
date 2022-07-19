@@ -1,3 +1,4 @@
 #!/bin/bash
 
-echo "Ok!"
+mkdir -p dist
+echo "Ok!" > dist/build

@@ -4,6 +4,8 @@ name: Receive PR
 # no access to secrets
 on:
   pull_request:
+    paths-ignore:
+      - '!.github/**'
 
 jobs:
   build:
@@ -14,15 +16,20 @@ jobs:
 
       # imitation of a build process
       - name: Build
-        run: /bin/bash ./build.sh
+        run: |
+          /bin/bash ./build.sh
 
       - name: Save PR number
         run: |
           mkdir -p ./pr
-          echo ${{ github.event.number }} > ./pr/NR
+          echo ${{ github.event.number }} > ./pr/number
+          echo ${{ github.event.pull_request.head.sha }} > ./pr/commit
+
       - uses: actions/upload-artifact@v2
         with:
           name: pr
-          path: pr/
+          path: |
+            pr/
+            dist/
 
 
